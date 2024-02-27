@@ -1,0 +1,11 @@
+notebook
+numpy==1.24.0
+scipy
+scikit-learn
+pandas
+matplotlib
+opencv-python
+ipykernel
+common
+scikit-image
+joblib
