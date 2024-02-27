@@ -5,6 +5,11 @@ import matplotlib as plt
 class Config:
     working_directory = "workingDirectory/"
     label_regex = "(.)(.)-(\d+)\.jpg"
+    class CardTypes:
+        basic_contours = ["AO","AC","AB","AS","2S","3S","3B","2B","2C"]
+        contours_to_count=["2O","3O","4O","5O","6O","7O","3C","4C","5C","6C","7C","4B","5B","6B","7B",
+        "4S","5S","6S","7S"]
+        contours_to_evaluate_color=["9O","9C","9B","9S","8O","8C","8B","8S","RO","RC","RB","RS"]
 
 def reverse_tuple(t):
     new_tuple = ()
@@ -57,13 +62,23 @@ def label_properties(path):
     import re
     list_of_matches = re.findall(Config.label_regex, path)
     arr = list_of_matches.pop()
-    return {"value": arr[0],"seed": arr[1], "index": arr[2]}
+    if arr[0]+arr[1] in Config.CardTypes.basic_contours:
+        label = arr[0]+arr[1]
+    elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
+        label = arr[1]
+    else: label = arr[0]
+    return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
 
 def label_class_only(path):
     import re
-    list_of_matches = re.search("(.[A-Z])\.jpg", path)
-    
-    return {"class": list_of_matches.group(1)}
+    list_of_matches = re.findall("(.)([A-Z])\.jpg", path)
+    arr = list_of_matches.pop()
+    if arr[0]+arr[1] in Config.CardTypes.basic_contours:
+        label = arr[0]+arr[1]
+    elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
+        label = arr[1]
+    else: label = arr[0]
+    return {"value": arr[0],"seed": arr[1],"label": label}
 
 def images_paths(dataset_directory):
     import glob

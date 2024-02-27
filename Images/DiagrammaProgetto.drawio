@@ -1,0 +1,90 @@
+<mxfile host="Electron" modified="2024-02-27T17:09:45.421Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/23.1.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="CpmpohH1TGS3soecnngW" version="23.1.5" type="device">
+  <diagram name="Pagina-1" id="IBxGYhdjXNhvbzq594ZX">
+    <mxGraphModel dx="1062" dy="627" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2eioUZBjE8bfNR_qd9BA-1" target="2eioUZBjE8bfNR_qd9BA-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-1" value="Immagine Carta" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="2eioUZBjE8bfNR_qd9BA-4">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="573" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-13" value="&lt;div style=&quot;color: rgb(212, 212, 212); background-color: rgb(30, 30, 30); font-family: &amp;quot;Droid Sans Mono&amp;quot;, &amp;quot;monospace&amp;quot;, monospace; line-height: 19px; font-size: 8px;&quot;&gt;&lt;br&gt;&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2eioUZBjE8bfNR_qd9BA-7">
+          <mxGeometry x="-0.3747" y="4" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-14" value="AO,AC,AB,AS,2S,3S,3B,2B,2C" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2eioUZBjE8bfNR_qd9BA-7">
+          <mxGeometry x="-0.1047" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="2eioUZBjE8bfNR_qd9BA-8">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="420" y="613" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-15" value="&lt;div&gt;Seme base O,B,S,C&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2eioUZBjE8bfNR_qd9BA-9">
+          <mxGeometry x="-0.3321" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="2eioUZBjE8bfNR_qd9BA-10">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="505" y="573" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-16" value="8*,9*,R*" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2eioUZBjE8bfNR_qd9BA-12">
+          <mxGeometry x="0.0056" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-2" value="The biggest contour is&amp;nbsp;&lt;br&gt;part of" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="335" y="532" width="170" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-4" value="FINE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90" y="613" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-8" value="Conta forme dello stesso tipo" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="773" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-10" value="Rivela Colore" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="590" y="613" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-17" value="Il 4 Oro potrebbe essere identificato dal simbolo al centro, ma visto che non è universale, si preferisce di ignorarlo&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="200" y="693" width="200" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2eioUZBjE8bfNR_qd9BA-18" target="2eioUZBjE8bfNR_qd9BA-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-18" value="Denoising" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="95" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2eioUZBjE8bfNR_qd9BA-20" target="2eioUZBjE8bfNR_qd9BA-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-20" value="Binarization" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="195" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2eioUZBjE8bfNR_qd9BA-22" target="2eioUZBjE8bfNR_qd9BA-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-22" value="Contourization" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="290" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-26" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="2eioUZBjE8bfNR_qd9BA-24" target="2eioUZBjE8bfNR_qd9BA-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2eioUZBjE8bfNR_qd9BA-24" value="Order Contours by&amp;nbsp;&lt;br&gt;Area" style="whiteSpace=wrap;html=1;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="360" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
