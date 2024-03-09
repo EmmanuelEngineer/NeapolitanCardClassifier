@@ -50,7 +50,7 @@ def image_inversion(image):
     return (255-image)
 
 def preprocess_image(image):
-    image = white_balance(image)
+ #   image = white_balance(image)
     gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     median_image = cv2.medianBlur(gray_image,3)
     img_contrasty_post_median = cv2.convertScaleAbs(median_image, 1.9, 1)
@@ -88,7 +88,7 @@ def average_hue_of_contours(image,contours):
 
 def label_properties(path):
     import re
-    list_of_matches = re.findall("(.)(.)-(.+)-(\d).jpg", path)
+    list_of_matches = re.findall("(.)(.)-(.+)-(\d+).jpg", path)
     arr = list_of_matches.pop()
     if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
                             Config.CardTypes.with_special_symbols):
@@ -100,7 +100,7 @@ def label_properties(path):
 
 def label_properties_generated(path):
     import re
-    list_of_matches = re.findall("(.)(.)-.+-(\d).jpg", path)
+    list_of_matches = re.findall("(.)(.)-.+-(\d+).jpg", path)
     arr = list_of_matches.pop()
     if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
                             Config.CardTypes.with_special_symbols):
