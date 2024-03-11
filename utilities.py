@@ -50,7 +50,7 @@ def image_inversion(image):
     return (255-image)
 
 def preprocess_image(image):
- #   image = white_balance(image)
+    image = white_balance(image)
     gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     median_image = cv2.medianBlur(gray_image,3)
     img_contrasty_post_median = cv2.convertScaleAbs(median_image, 1.9, 1)
@@ -111,13 +111,29 @@ def label_properties_generated(path):
     return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
 
 def white_balance(img):
-    result = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
-    avg_a = np.average(result[:, :, 1])
-    avg_b = np.average(result[:, :, 2])
-    result[:, :, 1] = result[:, :, 1] - ((avg_a - 128) * (result[:, :, 0] / 255.0) * 1.1)
-    result[:, :, 2] = result[:, :, 2] - ((avg_b - 128) * (result[:, :, 0] / 255.0) * 1.1)
-    result = cv2.cvtColor(result, cv2.COLOR_LAB2BGR)
-    return result
+    img_float = img.astype(np.float32)
+
+    # Compute the average value for each channel
+    avg_b = np.mean(img_float[:,:,0])
+    avg_g = np.mean(img_float[:,:,1])
+    avg_r = np.mean(img_float[:,:,2])
+
+    # Compute the scaling factors
+    avg_gray = (avg_b + avg_g + avg_r) / 3.0
+    scale_b = avg_gray / avg_b
+    scale_g = avg_gray / avg_g
+    scale_r = avg_gray / avg_r
+
+    # Apply the scaling factors to each channel
+    balanced_img = np.zeros_like(img_float)
+    balanced_img[:,:,0] = img_float[:,:,0] * scale_b
+    balanced_img[:,:,1] = img_float[:,:,1] * scale_g
+    balanced_img[:,:,2] = img_float[:,:,2] * scale_r
+
+    # Clip the values to the valid range [0, 255]
+    balanced_bgr_img = np.clip(balanced_img, 0, 255).astype(np.uint8)
+    
+    return balanced_bgr_img
 
 def label_class_only(path):
     import re
