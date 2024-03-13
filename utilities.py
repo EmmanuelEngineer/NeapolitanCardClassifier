@@ -18,7 +18,7 @@ def reverse_tuple(t):
     return new_tuple
 
 
-def print_image(*images,titles= None,columns = None):
+def print_image(*images,titles= None,columns = None,type = None):
     # create figure 
     fig = plt.figure(figsize=(10, 8)) 
     
@@ -32,7 +32,10 @@ def print_image(*images,titles= None,columns = None):
               rows = a
         else: rows = a+1
     
+    
     for image in images:
+        if(type=="bgr"):
+            image = cv2.cvtColor(image,cv2.COLOR_BGR2RGB)
         if titles == None:
              title = ""
         # Adds a subplot at the 1st position 
@@ -49,13 +52,16 @@ def gray_image(image):
 def image_inversion(image):
     return (255-image)
 
-def preprocess_image(image):
+def preprocess_image(image,alpha = 1.9,beta=1,invert_binary = True):
     image = white_balance(image)
     gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
     median_image = cv2.medianBlur(gray_image,3)
-    img_contrasty_post_median = cv2.convertScaleAbs(median_image, 1.9, 1)
+    img_contrasty_post_median = cv2.convertScaleAbs(median_image, alpha, beta)
     th, binary_image = cv2.threshold(img_contrasty_post_median, 155, 255, cv2.THRESH_BINARY)
-    contours, _ = cv2.findContours(image_inversion(binary_image), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if(invert_binary):
+        temp_bin = image_inversion(binary_image)
+    else:temp_bin = binary_image
+    contours, _ = cv2.findContours(temp_bin, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     ordered_contours = sorted(contours, key=cv2.contourArea, reverse=True)
     return binary_image, tuple(ordered_contours)
 
