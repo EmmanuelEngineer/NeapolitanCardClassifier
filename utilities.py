@@ -17,7 +17,7 @@ def reverse_tuple(t):
         new_tuple += (t[i],)
     return new_tuple
 
-
+#simple function to print images on the jupiter files
 def print_image(*images,titles= None,columns = None,type = None):
     # create figure 
     fig = plt.figure(figsize=(10, 8)) 
@@ -46,12 +46,14 @@ def print_image(*images,titles= None,columns = None,type = None):
         plt.axis('off') 
         plt.title(title)
 
+#refer to the file preprocessing_exp.ipynb
 def gray_image(image):
     return cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-
+#refer to the file preprocessing_exp.ipynb
 def image_inversion(image):
     return (255-image)
 
+#refer to the file preprocessing_exp.ipynb
 def preprocess_image(image,alpha = 1.9,beta=1,invert_binary = True):
     image = white_balance(image)
     gray_image = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)

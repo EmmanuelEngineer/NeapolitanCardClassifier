@@ -1,0 +1,193 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Template revision history:
+% BS02022: Revised by Sukumar Natarajan, s.natarajan@bath.ac.uk
+% BS2021: Revised by Filip Jorissen, filip.jorissen@kuleuven.be
+% BS2019: Revised by Alessandro Prada, alessandro.prada@unitn.it
+% BS2017: Initial version by Michael Wetter, mwetter@lbl.gov
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[twocolumn, a4paper,10pt]{article}
+\usepackage[top=2.5cm, bottom=2.5cm, left=2.0cm, right=2.0cm,
+columnsep=0.8cm]{geometry}
+\usepackage{enumitem}
+\usepackage[hyphens]{url}
+\usepackage[colorlinks,allcolors=blue]{hyperref}
+\usepackage{boxedminipage}
+\usepackage{nopageno}
+\usepackage{graphicx}
+\usepackage{natbib}
+\usepackage[font=it]{caption}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{bookmark}
+
+%-----------------------------SET SKIP SPACES -------------------------------------------------------------------
+\setlength{\abovecaptionskip}{0pt}
+\setlength{\belowcaptionskip}{3pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+%\renewcommand{\baselinestretch}{0.7}
+% FOR enumerates
+\setlist{itemsep=-0.1cm,topsep=0.1cm,labelsep=0.3cm}
+\setenumerate{leftmargin=*}
+\setcounter{secnumdepth}{-1}
+%-----------------------------SET FONTS -------------------------------------------------------------------
+% Set fonts for title, section and subsection headings
+\makeatletter
+\renewcommand\title[1]{\gdef\@title{\fontsize{12pt}{2pt}\bfseries{#1}}}
+\makeatletter
+\renewcommand\section{\@startsection{section}{1}{\z@}{3pt}{3pt}{\normalfont\large\bfseries}}
+% \normalfont\large
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}{\z@}{\z@}{\normalfont\normalsize\bfseries}}
+\makeatletter
+\renewcommand\subsection{\@startsection{subsection}{1}{\z@}{\z@}{0.1pt}{\normalfont\normalsize\bfseries}}
+\renewcommand\refname{References}
+%END OF THE SETUP
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Please keep the \vspace{4pt} at the top
+\title{%
+Executive summary for: Lethal Autonomous 
+Weapon Systems\\																								% Line 1
+%%% Please keep the \vspace{4pt} between lines in the title
+\vspace{4pt}
+Real world cases and Humanitarian implications \[LM-32 a.a. 2023/2024\]
+} 																																% Line 2 
+%If there is no second line then just put \phantom{Line 2} here
+%%% Change or delete text before "\\" on the lines below to keep the layout but don't remove the "\\"
+%%% Do not exceed more than 6 lines for authors and affiliations
+\author{																																														% Line 3
+Emmanuele Virginio Coppola$^1$, Mattias Trettel$^2$, Andrea Ceron$^2$\\ 																										% Line 4
+$^1$ emmanuele.coppola@studenti.unitn.it\\ 																																	% Line 5
+$^2$mattias.trettel@studenti.unitn.it\\
+$^2$andrea.ceron@studenti.unitn.it\\
+% comment the lines below and add \phantom{} lines as needed to reach a total of 10 lines
+%\textit{(The names and affiliations SHOULD NOT be included in the draft submitted for review)}\\ 			 			  	% Line 7
+%\textit{(leave blank up to line 10 - remove line numbering from final version)}\\ 															% Line 8
+\phantom{Line 9}} 																																									% Line 9
+\date{\vspace{-0.5cm}}	% remove default date and replace the Blank 10th line														% Line 10
+%END OF THE TITLE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle
+\begin{figure}
+  \centering
+
+\includegraphics[scale=0.6]{img/Logo.pdf} 																																	% Line 6 																																	% Line 6																																														% Line 3
+\end{figure}
+\section*{Abstract}	% Section headings need to be upper and lower case.
+\addtocounter{section}{1}
+
+This paper proposes a novel approach for playing card identification utilizing the face of the cards as the target carrier. The process begins with capturing a 24-bit true-color image of the card using a mobile phone. Subsequently, the image undergoes several preprocessing steps: downsampling, conversion to a 256-grayscale format, and binary conversion the recognition task.
+
+The main stages of processing involve identifying the card shape through contour approximation, determining the four angles of the card, and rectifying the perspective to align the card vertically. Once the card shape is accurately approximated, a contour shape matching technique is applied using the Hu invariant moment, which is robust against rotation, ensuring reliable identification.
+
+Furthermore, a classifier is employed to determine both the value and suit of the card. By integrating these techniques, visually impaired individuals can participate in Italian card games like scopa, enabling them to experience the enjoyment and social interaction associated with these games.
+\section*{Introduction}
+In recent years, the intersection of computer vision and assistive technology has witnessed remarkable advancements, particularly in enhancing accessibility and inclusivity for individuals with visual impairments. Among various applications, the recognition of playing cards stands as a notable example with potential implications for facilitating leisure activities and social engagement. Traditional card games, deeply ingrained in cultural and social contexts, often pose challenges for visually impaired individuals due to their reliance on visual cues for gameplay. Even if there exist card games that use special textures or braille in the card, not every deck of every card can have this system.
+
+This paper introduces a novel approach to playing card recognition, leveraging the intrinsic features of card faces as identification targets. Unlike conventional methods that primarily focus on text or pattern recognition, our proposed methodology centers on the unique visual characteristics of playing cards, enabling robust and efficient identification. By harnessing the capabilities of modern mobile devices, particularly their imaging capabilities, we aim to bridge the accessibility gap and empower visually impaired individuals to partake in card-based leisure activities.
+
+The methodology outlined in this paper encompasses a series of processing steps, including image preprocessing, contour approximation, perspective rectification, and classification. Notably, the utilization of the Hu invariant moment for contour shape matching ensures rotation invariance, thus enabling accurate card recognition regardless of orientation not only of the card, but even the figures in them. Furthermore, the integration of a classifier facilitates the identification of both card value and suit, enhancing the utility and versatility of the proposed system.
+
+Beyond its technical merits, the significance of playing card recognition extends to its potential societal impact, particularly in the realm of accessibility and inclusion. By enabling visually impaired individuals to participate in card games, such as traditional Italian games like scopa, our approach fosters social interaction, cognitive stimulation, and recreational enjoyment.
+
+\subsection*{State of the art}
+
+Various projects have explored the application of computer vision in card games, but many are constrained by reliance on OCR systems \cite{7972274} or restricted to simple shapes, as seen in poker games with few and clearly defined patterns \cite{9563607}. However, the scope of our project, Neapolitan Card Recogniser (NCR), extends beyond these limitations. NCR serves as a robust testbed for applying computer vision techniques to cards that may exhibit significant visual similarity, presenting a more challenging scenario than conventional approaches.
+
+\section*{Methods}
+In the subsequent sections, we delve into the details of our methodology, elucidate the experimental setup, present results, and discuss implications and future directions.
+\subsection*{Objective}
+NCR has the objective to distinguish between 40 cards: 10 values, 4 seeds.
+For certain cards this is trivial, since they are composed by figures that are simple since they are a rappresentation of the seed, repeated as many times as the value (4"Oro", 7"Spade",etc...),other cards are more complex to deal with.
+
+Specifically, cards like "Donna" (Queen), "Cavallo" (Knight), and "Re" (King), with respective values of 1, 8, 9, and 10, present unique challenges. The problem of the issue lies in cards with values 8, 9, and 10. For these cards, each suit exhibits remarkably similar shapes, complicating classification efforts.
+Conventional shape properties, such as moments and Hu moments, prove insufficient in resolving this challenge. We need to use these shape properties in combination with other information. 
+Color, in this case, serves as an invaluable supplementary feature, augmenting the existing shape properties to enhance classification accuracy.
+In total we have to identify reliably 22 individual shapes considering the 8, 9 and 10 cards one time, the basic suits, the "Assi" separately and several other cards with special symbols.
+TODO ADD IMAGES OF THE CARDS
+
+\subsection*{Experiment Platform}
+The project is brought to life with the following equipment and software:
+\begin{itemize}
+  \item Pixel 6a with stock camera application for taking photos;
+  \item Laptop equipped with intel 7100U processor (dual-core with hyperthreading)
+  \item Python 3.10.12 
+
+\end{itemize}
+
+\subsection*{Card Capture}
+The effectiveness of NCR hinges significantly on the robust detection of playing cards within a complex background. This section delves into the comprehensive methodology employed for card detection, detailing the steps from initial image acquisition to isolating potential card regions for further processing and classification.
+
+The journey begins with the acquisition of a high-definition image, which is then subjected to a series of preprocessing steps aimed at simplifying the detection process. Given the high resolution of images captured by the used camera, which can inadvertently emphasize minor imperfections on the card surface or background, an initial downsampling step is applied. This downsampling effectively reduces the image size by a factor of two, striking a balance between preserving essential details and minimizing unnecessary complexity.
+
+To further refine the image, a morphological operation known as 'closing' is performed using a 5x5 kernel. This step is crucial for smoothing the image's morphology, thereby eliminating small holes and creating a more uniform background. TODO ADD IMAGES Such uniformity is pivotal in distinguishing the card from its surroundings, especially when dealing with variable lighting conditions and backgrounds.
+
+Following preprocessing, the image undergoes a binary conversion process. This critical step transforms the image into a binary format, starkly contrasting the card against its background, thereby facilitating the detection of its contours. For a more detailed explanation of the preprocessing refer to the dedicated subsection \ref*{prepro}.
+
+To filter out insignificant contours—those too small to be cards the contours are ordered based on the dimension of the area, and the first area bigger than the treshold is than defined as the contour of the card.
+
+To define the corners we can take the furthest points from the center of the contour using numpy arrays functions, taking the points with the highest and minimum value for each coordinate.
+
+These corners are than used to warp the prospective using the \textbf{cv2.getPerspectiveTransform()} to get the warp matrix and the \textbf{cv2.warpPerspective()} to obtain the end result.
+
+
+\subsection*{Preprocessing} \label{prepro}
+Preprocessing serves as a critical foundation for the subsequent detection and recognition of Neapolitan cards. This stage involves several key procedures designed to enhance the image quality and isolate features crucial for accurate classification. The comprehensive preprocessing pipeline includes  white balance correction, grayscale conversion, median blurring, image inversion and contrast enhancement, and contour extraction. Each step is tailored to address specific challenges presented by the raw images and is crucial for the robust performance of the NCR.
+ 
+\subsubsection*{White Balance Correction}
+Given the variability of lighting conditions under which the images might be captured, the inconsistencies given by the auto white balance of the camera app, white balance correction is applied to ensure color consistency across different images. This step adjusts the image's color temperature, making the colors appear more natural and consistent, which is crucial for accurate feature extraction and classification later in the process.
+
+The correction process involves converting the image to a floating-point representation to compute the average value for each color channel (blue, green, and red). Scaling factors are then calculated to adjust each channel's average to match the overall average brightness, effectively neutralizing color casts caused by different lighting conditions.
+
+\subsubsection*{Grayscale Conversion and Median Blurring}
+
+To simplify the detection of contours and reduce the computational complexity, the image is converted to grayscale using the \textbf{cv2.cvtColor} function. This conversion discards color information, focusing on intensity variations (in 256 levels) that are essential for identifying card shapes and features.
+
+Following grayscale conversion, a median blur is applied to the image using \textbf{cv2.medianBlur} function with a 3x3 kernel. This type of blurring is effective in reducing noise and minor imperfections, such as dust specks, without significantly blurring the edges of the card. It helps in cleaning the image while avoiding an heavy impact on the contours of the image, without using edge preserving filters that could hinder performance. This is important especially during the ingestion of the massive dataset.
+
+Contrast Enhancement
+After median blurring, the image undergoes a contrast enhancement step. This is achieved by adjusting the image's contrast and brightness levels, making the card's features more pronounced and easier to detect. Enhanced contrast is particularly beneficial for highlighting the edges and details of the cards, which are critical for accurate identification.
+
+Image Inversion
+The preprocessing begins with an optional image inversion step, where the colors of the image are inverted to highlight specific features of the cards. This step can be particularly useful when dealing with images where the card details are more distinguishable in the inverse color space.
+
+Contour Extraction
+The culmination of the preprocessing steps is the extraction of contours from the enhanced image. This process involves identifying continuous curves that delineate the card's boundaries from the rest of the image. Contours are detected by applying edge detection algorithms to the preprocessed image, followed by the retrieval of outlines that represent potential card shapes.
+
+The contours are then sorted and possibly filtered based on their area and other geometric properties to ensure that only relevant contours, likely to represent cards, are considered in the subsequent processing stages. This selective approach streamlines the recognition process, focusing computational resources on the most promising candidates.
+\subsection*{Possible problems}
+Discussing autonomous systems raises concerns about the potential for significant damage and harm caused by a single individual. Examining the historical context of humanity, which can be viewed as a machine with the ability to experience emotions, reveals instances of substantial harm. Notable examples include the recent Yugoslavian war.
+
+\section*{Report limitation}
+Researching news and articles about LAWS and their utilization poses unique challenges. These technologies are rapidly advancing, and demonstrated unprecedented capabilities in autonomous actions just few years ago. Despite the existence of some literature on the subject, it is notably scarce and already obsolete.
+
+Even in the realm of commercial AI use, the "AI Act" intended as a flagship legislative initiative to promote the development and adoption of safe and reliable AI, has only recently received provisional agreement.
+
+Given these circumstances, our research opts to dig into the past to contemplate possible future. This approach takes into account the profound impact of these emerging technologies, acknowledging the scarcity of up-to-date information and the imperative need to consider their implications.
+
+\section*{Conclusions}
+Lethal Autonomous Weapons Systems without restrictions, especially those disregarding international humanitarian laws, not only risk repeating historical horrors but also have the potential to escalate violations. 
+
+Historically, in every army, there might have been at least one responsible soldier who refused orders that violated international humanitarian laws. 
+
+Looking ahead, the concern arises that entire armies could be comprised solely of LAWS, driven by the pursuit of orders at any cost, potentially resulting in humanitarian law violations. 
+
+Another challenge is the potential misapplication of lawful orders, leading to LAWS violations of humanitarian laws, as solutions would be considered that would bring very serious harm to the civilian population.
+
+To address these concerns, it is crucial for LAWS to incorporate in every decision international laws (including the four humanitarian principles, focus of our project) enabling them to reject orders that could lead to legal or ethical violations.
+
+Determining what is ethical and legal is a challenging task, often influenced by context, which can alter the morality of an action. Therefore, having a human in the loop is valuable to assess when to approve or reject an action. However, incorporating humans in the loop may decrease the efficiency of LAWS. If the deployment of LAWS is inevitable, placing trust in the ethical judgment of the programmers is the only thing we can do.
+
+\nocite{*}
+\bibliographystyle{plainnat}
+\bibliography{bibliografia}
+\newpage
+\onecolumn
+\end{document}

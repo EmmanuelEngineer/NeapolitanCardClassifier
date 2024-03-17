@@ -1,0 +1,25 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Hu et~al.(2021)Hu, Yu, Wan, and Yuan]{9563607}
+Xuewen Hu, Tao Yu, Kai Wan, and Jie Yuan.
+\newblock Poker card recognition with computer vision methods.
+\newblock In \emph{2021 IEEE International Conference on Electronic Technology,
+  Communication and Information (ICETCI)}, pages 11--15, 2021.
+\newblock \doi{10.1109/ICETCI53161.2021.9563607}.
+
+\bibitem[Purushothaman et~al.(2017)Purushothaman, Kashyap, Singh, Bharti, and
+  Sawant]{7972274}
+Sarath~Kumar Purushothaman, Nishant Kashyap, Viral Singh, Abhishek Bharti, and
+  Sanjeed Sawant.
+\newblock Automation approach for cocos-2dx based multi-player card game for
+  web and mobile.
+\newblock In \emph{2017 2nd International Conference on Computing and
+  Communications Technologies (ICCCT)}, pages 222--225, 2017.
+\newblock \doi{10.1109/ICCCT2.2017.7972274}.
+
+\end{thebibliography}
