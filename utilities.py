@@ -102,11 +102,19 @@ def label_properties(path):
                             Config.CardTypes.with_special_symbols+
                             Config.CardTypes.contours_to_evaluate_color):
         label = arr[0]+arr[1]
-    elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
-        label = arr[1]
     else: label = arr[0]
     return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
 
+def label_properties_raw(path):
+    import re
+    list_of_matches = re.findall("(.)(.)-(\d+).jpg", path)
+    arr = list_of_matches.pop()
+    if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
+                            Config.CardTypes.with_special_symbols+
+                            Config.CardTypes.contours_to_evaluate_color):
+        label = arr[0]+arr[1]
+    else: label = arr[0]
+    return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
 def label_properties_generated(path):
     import re
     list_of_matches = re.findall("(.)(.)-.+-(\d+).jpg", path)

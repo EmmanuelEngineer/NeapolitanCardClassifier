@@ -51,8 +51,7 @@ columnsep=0.8cm]{geometry}
 %%%%%%%%%%%%%%%%%%%%%%%%   TITLE   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Please keep the \vspace{4pt} at the top
 \title{%
-Executive summary for: Lethal Autonomous 
-Weapon Systems\\																								% Line 1
+Project Report for: Neapolitan Card Classifier\\																								% Line 1
 %%% Please keep the \vspace{4pt} between lines in the title
 \vspace{4pt}
 Real world cases and Humanitarian implications \[LM-32 a.a. 2023/2024\]
@@ -61,10 +60,8 @@ Real world cases and Humanitarian implications \[LM-32 a.a. 2023/2024\]
 %%% Change or delete text before "\\" on the lines below to keep the layout but don't remove the "\\"
 %%% Do not exceed more than 6 lines for authors and affiliations
 \author{																																														% Line 3
-Emmanuele Virginio Coppola$^1$, Mattias Trettel$^2$, Andrea Ceron$^2$\\ 																										% Line 4
+Emmanuele Virginio Coppola$^1$\\ 																										% Line 4
 $^1$ emmanuele.coppola@studenti.unitn.it\\ 																																	% Line 5
-$^2$mattias.trettel@studenti.unitn.it\\
-$^2$andrea.ceron@studenti.unitn.it\\
 % comment the lines below and add \phantom{} lines as needed to reach a total of 10 lines
 %\textit{(The names and affiliations SHOULD NOT be included in the draft submitted for review)}\\ 			 			  	% Line 7
 %\textit{(leave blank up to line 10 - remove line numbering from final version)}\\ 															% Line 8
@@ -99,13 +96,13 @@ Beyond its technical merits, the significance of playing card recognition extend
 
 \subsection*{State of the art}
 
-Various projects have explored the application of computer vision in card games, but many are constrained by reliance on OCR systems \cite{7972274} or restricted to simple shapes, as seen in poker games with few and clearly defined patterns \cite{9563607}. However, the scope of our project, Neapolitan Card Recogniser (NCR), extends beyond these limitations. NCR serves as a robust testbed for applying computer vision techniques to cards that may exhibit significant visual similarity, presenting a more challenging scenario than conventional approaches.
+Various projects have explored the application of computer vision in card games, but many are constrained by reliance on OCR systems \cite{7972274} or restricted to simple shapes, as seen in poker games with few and clearly defined patterns \cite{9563607}. However, the scope of our project, Neapolitan Card Recognizer (NCR), extends beyond these limitations. NCR serves as a robust testbed for applying computer vision techniques to cards that may exhibit significant visual similarity, presenting a more challenging scenario than conventional approaches.
 
 \section*{Methods}
 In the subsequent sections, we delve into the details of our methodology, elucidate the experimental setup, present results, and discuss implications and future directions.
 \subsection*{Objective}
 NCR has the objective to distinguish between 40 cards: 10 values, 4 seeds.
-For certain cards this is trivial, since they are composed by figures that are simple since they are a rappresentation of the seed, repeated as many times as the value (4"Oro", 7"Spade",etc...),other cards are more complex to deal with.
+For certain cards this is trivial, since they are composed by figures that are simple since they are a representation of the seed, repeated as many times as the value (4"Oro", 7"Spade",etc...),other cards are more complex to deal with.
 
 Specifically, cards like "Donna" (Queen), "Cavallo" (Knight), and "Re" (King), with respective values of 1, 8, 9, and 10, present unique challenges. The problem of the issue lies in cards with values 8, 9, and 10. For these cards, each suit exhibits remarkably similar shapes, complicating classification efforts.
 Conventional shape properties, such as moments and Hu moments, prove insufficient in resolving this challenge. We need to use these shape properties in combination with other information. 
@@ -152,41 +149,30 @@ To simplify the detection of contours and reduce the computational complexity, t
 
 Following grayscale conversion, a median blur is applied to the image using \textbf{cv2.medianBlur} function with a 3x3 kernel. This type of blurring is effective in reducing noise and minor imperfections, such as dust specks, without significantly blurring the edges of the card. It helps in cleaning the image while avoiding an heavy impact on the contours of the image, without using edge preserving filters that could hinder performance. This is important especially during the ingestion of the massive dataset.
 
-Contrast Enhancement
-After median blurring, the image undergoes a contrast enhancement step. This is achieved by adjusting the image's contrast and brightness levels, making the card's features more pronounced and easier to detect. Enhanced contrast is particularly beneficial for highlighting the edges and details of the cards, which are critical for accurate identification.
+\subsubsection*{Contrast Enhancement}
+After median blurring, the image undergoes a contrast enhancement step. This is achieved by adjusting the image's contrast and brightness levels, making the card's features more pronounced and easier to detect. It is done \textbf{cv2.convertScaleAbs} Enhanced contrast is particularly beneficial for highlighting the edges and details of the cards, which are critical for accurate identification.
 
-Image Inversion
-The preprocessing begins with an optional image inversion step, where the colors of the image are inverted to highlight specific features of the cards. This step can be particularly useful when dealing with images where the card details are more distinguishable in the inverse color space.
+\subsubsection*{Binarization}
+Once we have gotten the best card image possible we can binarize the image. Taking in consideration that we are working with cards we can use a pretty high treshold. We can use the \textbf{cv2.threshold}  with a treshold of 155.
 
-Contour Extraction
-The culmination of the preprocessing steps is the extraction of contours from the enhanced image. This process involves identifying continuous curves that delineate the card's boundaries from the rest of the image. Contours are detected by applying edge detection algorithms to the preprocessed image, followed by the retrieval of outlines that represent potential card shapes.
+\subsubsection*{Image Inversion}
+For the contour extraction we have to distinguish between when we have photos of black subjects on white backgrounds(card shapes on cards) and the inverse(card on dark background).
+Since the contour extraction works with in the second case, we have to implement a function to invert the binary values from the previous state when identifying the figures on the card.
 
-The contours are then sorted and possibly filtered based on their area and other geometric properties to ensure that only relevant contours, likely to represent cards, are considered in the subsequent processing stages. This selective approach streamlines the recognition process, focusing computational resources on the most promising candidates.
-\subsection*{Possible problems}
+ \subsubsection*{Contour Extraction}
+The culmination of the preprocessing steps is the extraction of contours from the enhanced image. This process involves identifying continuous curves that delineate the card's boundaries from the rest of the image. Contours are detected by applying edge detection algorithms to the preprocessed image, followed by the retrieval of outlines that represent potential card shapes. The function used is the \textbf{cv2.findContours}.
+
+The contours are then sorted and possibly filtered based on their area to ensure that only relevant contours, likely to represent cards, are considered in the subsequent processing stages. This selective approach streamlines the recognition process, focusing computational resources on the most promising candidates.
+
+\subsection*{Classification}
 Discussing autonomous systems raises concerns about the potential for significant damage and harm caused by a single individual. Examining the historical context of humanity, which can be viewed as a machine with the ability to experience emotions, reveals instances of substantial harm. Notable examples include the recent Yugoslavian war.
 
 \section*{Report limitation}
-Researching news and articles about LAWS and their utilization poses unique challenges. These technologies are rapidly advancing, and demonstrated unprecedented capabilities in autonomous actions just few years ago. Despite the existence of some literature on the subject, it is notably scarce and already obsolete.
-
-Even in the realm of commercial AI use, the "AI Act" intended as a flagship legislative initiative to promote the development and adoption of safe and reliable AI, has only recently received provisional agreement.
-
-Given these circumstances, our research opts to dig into the past to contemplate possible future. This approach takes into account the profound impact of these emerging technologies, acknowledging the scarcity of up-to-date information and the imperative need to consider their implications.
 
 \section*{Conclusions}
-Lethal Autonomous Weapons Systems without restrictions, especially those disregarding international humanitarian laws, not only risk repeating historical horrors but also have the potential to escalate violations. 
-
-Historically, in every army, there might have been at least one responsible soldier who refused orders that violated international humanitarian laws. 
-
-Looking ahead, the concern arises that entire armies could be comprised solely of LAWS, driven by the pursuit of orders at any cost, potentially resulting in humanitarian law violations. 
-
-Another challenge is the potential misapplication of lawful orders, leading to LAWS violations of humanitarian laws, as solutions would be considered that would bring very serious harm to the civilian population.
-
-To address these concerns, it is crucial for LAWS to incorporate in every decision international laws (including the four humanitarian principles, focus of our project) enabling them to reject orders that could lead to legal or ethical violations.
-
-Determining what is ethical and legal is a challenging task, often influenced by context, which can alter the morality of an action. Therefore, having a human in the loop is valuable to assess when to approve or reject an action. However, incorporating humans in the loop may decrease the efficiency of LAWS. If the deployment of LAWS is inevitable, placing trust in the ethical judgment of the programmers is the only thing we can do.
 
 \nocite{*}
-\bibliographystyle{plainnat}
+\biblsectioniographystyle{plainnat}
 \bibliography{bibliografia}
 \newpage
 \onecolumn
