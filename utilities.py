@@ -6,9 +6,9 @@ class Config:
     working_directory = "workingDirectory/"
     class CardTypes:
         with_special_symbols = ["4S","5S","4O","7S"]
-        basic_contours = ["AO","AC","AB","AS","2S","3S","3B","2B","2C"]
+        individual_shape = ["AO","AC","AB","AS","2S","3S","3B","2B","2C"]
         contours_to_count=["2O","3O","5O","6O","7O","3C","4C","5C","6C","7C","4B","5B","6B","7B",
-        "6S"]#7S
+        "6S"]
         contours_to_evaluate_color=["9O","9C","9B","9S","8O","8C","8B","8S","RO","RC","RB","RS"]
 
 def reverse_tuple(t):
@@ -98,29 +98,37 @@ def label_properties(path):
     import re
     list_of_matches = re.findall("(.)(.)-(.+)-(\d+).jpg", path)
     arr = list_of_matches.pop()
-    if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
+    if arr[0]+arr[1] in (Config.CardTypes.individual_shape + 
                             Config.CardTypes.with_special_symbols+
                             Config.CardTypes.contours_to_evaluate_color):
         label = arr[0]+arr[1]
+    elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
+        label = arr[1]
     else: label = arr[0]
     return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
+
 
 def label_properties_raw(path):
     import re
     list_of_matches = re.findall("(.)(.)-(\d+).jpg", path)
     arr = list_of_matches.pop()
-    if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
+    if arr[0]+arr[1] in (Config.CardTypes.individual_shape + 
                             Config.CardTypes.with_special_symbols+
                             Config.CardTypes.contours_to_evaluate_color):
         label = arr[0]+arr[1]
+    elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
+        label = arr[1]
     else: label = arr[0]
     return {"value": arr[0],"seed": arr[1],"label": label, "index": arr[2]}
+
+
 def label_properties_generated(path):
     import re
     list_of_matches = re.findall("(.)(.)-.+-(\d+).jpg", path)
     arr = list_of_matches.pop()
-    if arr[0]+arr[1] in (Config.CardTypes.basic_contours + 
-                            Config.CardTypes.with_special_symbols):
+    if arr[0]+arr[1] in (Config.CardTypes.individual_shape + 
+                            Config.CardTypes.with_special_symbols+
+                            Config.CardTypes.contours_to_evaluate_color):
         label = arr[0]+arr[1]
     elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
         label = arr[1]
@@ -156,7 +164,7 @@ def label_class_only(path):
     import re
     list_of_matches = re.findall("(.)([A-Z])\.jpg", path)
     arr = list_of_matches.pop()
-    if arr[0]+arr[1] in Config.CardTypes.basic_contours:
+    if arr[0]+arr[1] in Config.CardTypes.individual_shape:
         label = arr[0]+arr[1]
     elif  arr[0]+arr[1] in Config.CardTypes.contours_to_count:
         label = arr[1]

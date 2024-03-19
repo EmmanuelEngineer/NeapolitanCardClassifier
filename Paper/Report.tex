@@ -15,6 +15,7 @@ columnsep=0.8cm]{geometry}
 \usepackage{boxedminipage}
 \usepackage{nopageno}
 \usepackage{graphicx}
+\usepackage{amsmath}
 \usepackage{natbib}
 \usepackage[font=it]{caption}
 \usepackage[usenames,dvipsnames]{xcolor}
@@ -96,7 +97,7 @@ Beyond its technical merits, the significance of playing card recognition extend
 
 \subsection*{State of the art}
 
-Various projects have explored the application of computer vision in card games, but many are constrained by reliance on OCR systems \cite{7972274} or restricted to simple shapes, as seen in poker games with few and clearly defined patterns \cite{9563607}. However, the scope of our project, Neapolitan Card Recognizer (NCR), extends beyond these limitations. NCR serves as a robust testbed for applying computer vision techniques to cards that may exhibit significant visual similarity, presenting a more challenging scenario than conventional approaches.
+Various projects have explored the application of computer vision in card games, but many are constrained by reliance on OCR systems \cite*{7972274} or restricted to simple shapes, as seen in poker games with few and clearly defined patterns \cite*{9563607}. However, the scope of our project, Neapolitan Card Recognizer (NCR), extends beyond these limitations. NCR serves as a robust testbed for applying computer vision techniques to cards that may exhibit significant visual similarity, presenting a more challenging scenario than conventional approaches.
 
 \section*{Methods}
 In the subsequent sections, we delve into the details of our methodology, elucidate the experimental setup, present results, and discuss implications and future directions.
@@ -126,7 +127,7 @@ The journey begins with the acquisition of a high-definition image, which is the
 
 To further refine the image, a morphological operation known as 'closing' is performed using a 5x5 kernel. This step is crucial for smoothing the image's morphology, thereby eliminating small holes and creating a more uniform background. TODO ADD IMAGES Such uniformity is pivotal in distinguishing the card from its surroundings, especially when dealing with variable lighting conditions and backgrounds.
 
-Following preprocessing, the image undergoes a binary conversion process. This critical step transforms the image into a binary format, starkly contrasting the card against its background, thereby facilitating the detection of its contours. For a more detailed explanation of the preprocessing refer to the dedicated subsection \ref*{prepro}.
+Following preprocessing, the image undergoes a binary conversion process. This critical step transforms the image into a binary format, starkly contrasting the card against its background, thereby facilitating the detection of its contours. For a more detailed explanation of the preprocessing refer to the dedicated subsection.
 
 To filter out insignificant contours—those too small to be cards the contours are ordered based on the dimension of the area, and the first area bigger than the treshold is than defined as the contour of the card.
 
@@ -135,7 +136,7 @@ To define the corners we can take the furthest points from the center of the con
 These corners are than used to warp the prospective using the \textbf{cv2.getPerspectiveTransform()} to get the warp matrix and the \textbf{cv2.warpPerspective()} to obtain the end result.
 
 
-\subsection*{Preprocessing} \label{prepro}
+\subsection*{Preprocessing} 
 Preprocessing serves as a critical foundation for the subsequent detection and recognition of Neapolitan cards. This stage involves several key procedures designed to enhance the image quality and isolate features crucial for accurate classification. The comprehensive preprocessing pipeline includes  white balance correction, grayscale conversion, median blurring, image inversion and contrast enhancement, and contour extraction. Each step is tailored to address specific challenges presented by the raw images and is crucial for the robust performance of the NCR.
  
 \subsubsection*{White Balance Correction}
@@ -164,15 +165,81 @@ The culmination of the preprocessing steps is the extraction of contours from th
 
 The contours are then sorted and possibly filtered based on their area to ensure that only relevant contours, likely to represent cards, are considered in the subsequent processing stages. This selective approach streamlines the recognition process, focusing computational resources on the most promising candidates.
 
+\subsection*{Dataset}
+The creation of a robust and varied dataset is pivotal for the development of any machine learning system, including the Neapolitan Card Recognizer (NCR). This section outlines the methodology adopted for generating a comprehensive dataset of Neapolitan cards, focusing on the techniques employed to simulate a wide range of real-world conditions under which the cards might be photographed.
+
+\subsubsection{Initial Setup and Preprocessing}
+The dataset generation process begins with a collection of high-quality digital scans of Neapolitan cards. These scans are manually cropped to isolate individual cards, ensuring clarity and consistency across the initial dataset. To create a more resilient classifier is than applied a perspective transformation. 
+
+\subsubsection{Perspective Transformation}
+A crucial step in dataset augmentation is the application of perspective transformations to the card images. This process simulates the effect of capturing photos from various angles and distances, introducing realistic distortions akin to those seen in everyday use. Is than applied a random perspective change.
+
+The objective is to generate a unique perspective matrix for each image based on random parameters. This approach significantly enhances the dataset's diversity by emulating a wide array of possible shooting angles. The parameters for the matrix are determined using a combination of fixed seeds for repeatability and random number generation to introduce controlled randomness into the transformation process.
+\begin{equation}
+  \centering
+  \begin{bmatrix}
+    1+r & 0+r & 0+r\\
+    0+r & 1+r & 0+r\\
+    0 & 0 & 1+r
+  \end{bmatrix}
+  \caption*{Perspective matrix applied for the transformation. The value "r" is random value between -0.02 and 0.02}
+\end{equation}
+
+
+To accommodate the distortions without clipping the card images, each card is first placed centrally within a larger canvas before the perspective transformation. This step ensures that the entirety of the card remains visible post-transformation, regardless of the distortion applied.
+
+Each card image undergoes the random perspective change a predetermined number of times (in this case, 24 iterations per card). This process results in a significantly augmented dataset, with each original image yielding 24 uniquely transformed variants. These variants are saved to a new dataset directory, systematically labeled to facilitate easy identification and retrieval.
+\begin{figure}
+    \includegraphics[width=.15\textwidth]{img/w_cards/w_card1.jpg}\hfill
+    \includegraphics[width=.15\textwidth]{img/w_cards/w_card2.jpg}
+    \\[\smallskipamount]
+    \includegraphics[width=.15\textwidth]{img/w_cards/w_card3.jpg}\hfill
+    \includegraphics[width=.15\textwidth]{img/w_cards/w_card4.jpg}
+    \caption*{Original card and 3 warped versions}
+\end{figure}
+
+The labels incorporate both the card's characteristics (value, seed) and the iteration of the transformation, allowing for precise tracking of data provenance and characteristics.
+
+Each processed image, complete with detected contours, is saved back to the working directory, to have the possibility to manually check the effectiveness of the generation.
+TODO ADD SAMPLES OF WARPED CARDS with CONTOURS
+
+
 \subsection*{Classification}
-Discussing autonomous systems raises concerns about the potential for significant damage and harm caused by a single individual. Examining the historical context of humanity, which can be viewed as a machine with the ability to experience emotions, reveals instances of substantial harm. Notable examples include the recent Yugoslavian war.
+
+The classification stage is the culmination of the Neapolitan Card Recognizer (NCR) process, where the system leverages machine learning algorithms to accurately identify the type of card present in an image. This section details the methodology employed in the card classification process, highlighting the data preparation, feature extraction, model training, evaluation, and the utilization of the classification model for predicting card types.
+
+\subsubsection*{Data Preparation and Feature Extraction}
+The classification process begins with the preparation of a dataset comprising images of Neapolitan cards that have been subjected to various transformations to simulate real-world conditions. Each image in the dataset is processed to extract two main types of features: Hu Moments and the average hue. Hu Moments are used to capture the shape information of the cards, while the average hue captures the color information, both of which are crucial for distinguishing between different types of Neapolitan cards.
+
+Hu Moments: These moments are calculated for each card's biggest contour, providing a seven-element feature vector that describes the shape of the card. They have been calculated using the function \textbf{cv2.HuMoments} applied on the moments obtained with \textbf{cv2.moments}.\\
+
+Average Hue: This feature represents the average color hue within the contour of the card, adding an additional dimension to the feature set.
+These features are concatenated to form a comprehensive feature vector for each card, which serves as the input for the machine learning model.
+
+\subsubsection*{Model Training}
+For the classification model, a RandomForestClassifier from the scikit-learn library is chosen due to its effectiveness in handling non-linear data and its ability to model the complex relationships between the shape and color features of the cards. The dataset is split into training and testing subsets to evaluate the model's performance accurately. A StandardScaler is applied to the feature vectors to normalize the data, ensuring that the model is not biased by the scale of the features.
+
+The RandomForest model is trained on the normalized training data, with the label for each image indicating the type of Neapolitan card (e.g., "7B" for seven of "bastoni"). The number of estimators for the RandomForestClassifier is set to 10, providing a balance between model complexity and performance.
+
+\subsubsection*{Evaluation and Prediction}
+After training, the model's accuracy is evaluated on the testing subset of the dataset. The accuracy score and a detailed classification report provide insight into the model's performance across different card types. Additionally, a confusion matrix is generated to visualize the model's predictions compared to the true labels, highlighting areas where the model may be confusing one card type for another \ref{fig:c_matrix}.
+
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.4]{img/confusionMatrix.png}
+  \caption{Confusion Matrix that rappresent accuracy using the generated dataset. The contours to count are labeled as basic Suits [B,C,O,S]}
+  \label{fig:c_matrix}
+\end{figure}
+
+The trained RandomForest model, along with the scaler, is then saved to disk for future use in classifying new card images.
 
 \section*{Report limitation}
 
 \section*{Conclusions}
 
 \nocite{*}
-\biblsectioniographystyle{plainnat}
+\def\biblsectioniographystyle{plainnat}
+
 \bibliography{bibliografia}
 \newpage
 \onecolumn
