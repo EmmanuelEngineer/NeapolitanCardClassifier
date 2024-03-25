@@ -1,16 +1,16 @@
 # Fdb version 3
-["bibtex Report"] 1711361557 "Report.aux" "Report.bbl" "Report" 1711361609
+["bibtex Report"] 1711370136 "Report.aux" "Report.bbl" "Report" 1711370144
   "./BSO2022.bst" 1710762309 28483 36359a7b7b5926dc80723250408d1479 ""
-  "Report.aux" 1711361609 2749 4b8723f81d7531e26d66d7852bdbc1bc "pdflatex"
+  "Report.aux" 1711370144 2738 915de738f51e72463f0337f22f7143d2 "pdflatex"
   "references.bib" 1711360946 1132 2cc029048022dc75a77e1ea171a78525 ""
   (generated)
   "Report.bbl"
   "Report.blg"
-["pdflatex"] 1711361609 "/home/emmavico/Programmi/ProgettiGit/Neapolitan/NeapolitanCardClassifier/Paper/Report.tex" "Report.pdf" "Report" 1711361609
+["pdflatex"] 1711370143 "/home/emmavico/Programmi/ProgettiGit/Neapolitan/NeapolitanCardClassifier/Paper/Report.tex" "Report.pdf" "Report" 1711370144
   "/etc/texmf/web2c/texmf.cnf" 1710860879 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/emmavico/.texlive2021/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk" 1710861590 11524 ecb0bcca0104039198a62b0a0dae3680 ""
   "/home/emmavico/.texlive2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1710861586 1405651 36e45ee5c31c39ae5f99116418ea2d18 ""
-  "/home/emmavico/Programmi/ProgettiGit/Neapolitan/NeapolitanCardClassifier/Paper/Report.tex" 1711361608 30223 597c981d18413eb5143b86a40758bbcd ""
+  "/home/emmavico/Programmi/ProgettiGit/Neapolitan/NeapolitanCardClassifier/Paper/Report.tex" 1711370143 30056 a565481c1a47ebfe074bc8dbdcbe729f ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -109,9 +109,9 @@
   "/usr/share/texlive/texmf-dist/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/usr/share/texmf/web2c/texmf.cnf" 1644012257 39432 7155514e09a3d69036fac785183a21c2 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1711188421 128079 8307b05160bf39a2fd341a004bf1a4b3 ""
-  "Report.aux" 1711361609 2749 4b8723f81d7531e26d66d7852bdbc1bc "pdflatex"
-  "Report.bbl" 1711361557 588 892753955a8543064e1088a314983a12 "bibtex Report"
-  "Report.tex" 1711361608 30223 597c981d18413eb5143b86a40758bbcd ""
+  "Report.aux" 1711370144 2738 915de738f51e72463f0337f22f7143d2 "pdflatex"
+  "Report.bbl" 1711370136 588 892753955a8543064e1088a314983a12 "bibtex Report"
+  "Report.tex" 1711370143 30056 a565481c1a47ebfe074bc8dbdcbe729f ""
   "img/1-raw.png" 1710886402 660832 d84c310e13cafde68be725357a8bb5c5 ""
   "img/2-cardIdentified.png" 1710886410 641157 caa19a2716f13fa7c818e37fe180f8c6 ""
   "img/2S.jpg" 1711188815 50575 360af940e2cd9754224de2212af8133f ""
